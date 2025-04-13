@@ -1,8 +1,11 @@
 name: Settle Up monthly expense daily sync
 
+
+# Cron minimum is 5 but not guaranteed
+# Reference: https://stackoverflow.com/questions/63192132/why-does-my-cron-configured-github-action-not-run-every-2-minutes
 on:
   schedule:
-    - cron: '* * * * *' # every minute
+    - cron: '*/5 * * * *' # every 5
   workflow_dispatch:
 
 
