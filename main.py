@@ -47,10 +47,7 @@ def init_gspread():
     return client.open_by_key(SHEET_ID).worksheet(str(curr_year))
 
 if __name__ == "__main__":
-
-
     CURR_MONTH = datetime.now(tz=timezone.utc).strftime("%B")
-
     config = {
         "apiKey": SETTLE_UP_API_KEY,
         "authDomain": DOMAIN,
