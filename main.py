@@ -16,6 +16,8 @@ USER_EMAIL = os.getenv("USER_EMAIL")
 USER_PASSWORD = os.getenv("USER_PASSWORD")
 SETTLE_UP_API_KEY = os.getenv("SETTLE_UP_API_KEY")
 SHEET_ID = os.getenv("SHEET_ID")
+RAW_PRIVATE_KEY = os.getenv("PRIVATE_KEY")
+PRIVATE_KEY = RAW_PRIVATE_KEY.replace("\\n", "\n")
 OFFSET = 2
 
 scopes = [
@@ -32,7 +34,7 @@ def init_gspread():
       "type": "service_account",
       "project_id": "scripts-interval",
       "private_key_id": "63c81a1a9c37e33774bcb35e2506d49bea8dc66b",
-      "private_key": os.getenv("PRIVATE_KEY"),
+      "private_key": PRIVATE_KEY,
       "client_email": "scripts-interval-sa@scripts-interval.iam.gserviceaccount.com",
       "client_id": "115821091947389819402",
       "auth_uri": "https://accounts.google.com/o/oauth2/auth",
