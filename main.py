@@ -28,7 +28,21 @@ curr_month_num = dt.month
 month_name = calendar.month_name[curr_month_num - OFFSET]
 
 def init_gspread():
-    gcreds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+    credentials = {
+      "type": "service_account",
+      "project_id": "scripts-interval",
+      "private_key_id": "63c81a1a9c37e33774bcb35e2506d49bea8dc66b",
+      "private_key": os.getenv("PRIVATE_KEY"),
+      "client_email": "scripts-interval-sa@scripts-interval.iam.gserviceaccount.com",
+      "client_id": "115821091947389819402",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scripts-interval-sa%40scripts-interval.iam.gserviceaccount.com",
+      "universe_domain": "googleapis.com"
+    }
+
+    gcreds = Credentials.from_service_account_info(credentials, scopes=scopes)
     client = gspread.authorize(gcreds)
     return client.open_by_key(SHEET_ID).worksheet(str(curr_year))
 
