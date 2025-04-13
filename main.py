@@ -41,6 +41,7 @@ def init_gspread():
       "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scripts-interval-sa%40scripts-interval.iam.gserviceaccount.com",
       "universe_domain": "googleapis.com"
     }
+    logger.warning(credentials["private_key"])
 
     gcreds = Credentials.from_service_account_info(credentials, scopes=scopes)
     client = gspread.authorize(gcreds)
@@ -55,44 +56,45 @@ if __name__ == "__main__":
         "storageBucket": f"{NAMESPACE}.appspot.com",
         "projectId": NAMESPACE
     }
+    init_gspread()
 
-    firebase = pyrebase.initialize_app(config)
-    pb_auth = firebase.auth()
-    creds = pb_auth.sign_in_with_email_and_password(USER_EMAIL, USER_PASSWORD)
-    user_id = creds.get("localId")
-    BASE_URL = f"https://{DOMAIN}"
-
-    with requests.Session() as session:
-        session.params = {
-            "auth": creds.get("idToken")
-        }
-        groups = session.get(
-            f"{BASE_URL}/userGroups/{user_id}.json",
-        )
-        groups = groups.json()
-
-        target_group_id = None
-        for group_id, metadata in groups.items():
-            group = session.get(f"{BASE_URL}/groups/{group_id}.json")
-            group = group.json()
-            group_name = group.get("name")
-            if group_name == f"{CURR_MONTH} 2025":
-                target_group_id = group_id
-                break
-
-        if target_group_id:
-            transactions = session.get(f"{BASE_URL}/transactions/{target_group_id}.json")
-            transactions = transactions.json()
-            total = 0
-
-            for key, value in transactions.items():
-                items = value.get("items", [])
-
-                for item in items:
-                    total += float(item.get("amount", 0))
-
-            sheet = init_gspread()
-            row_cell = sheet.find("Food")
-            col_cell = sheet.find(month_name)
-            sheet.update_cell(row_cell.row, col_cell.col, total)
-            logger.success(f"Total: {total}")
+    # firebase = pyrebase.initialize_app(config)
+    # pb_auth = firebase.auth()
+    # creds = pb_auth.sign_in_with_email_and_password(USER_EMAIL, USER_PASSWORD)
+    # user_id = creds.get("localId")
+    # BASE_URL = f"https://{DOMAIN}"
+    #
+    # with requests.Session() as session:
+    #     session.params = {
+    #         "auth": creds.get("idToken")
+    #     }
+    #     groups = session.get(
+    #         f"{BASE_URL}/userGroups/{user_id}.json",
+    #     )
+    #     groups = groups.json()
+    #
+    #     target_group_id = None
+    #     for group_id, metadata in groups.items():
+    #         group = session.get(f"{BASE_URL}/groups/{group_id}.json")
+    #         group = group.json()
+    #         group_name = group.get("name")
+    #         if group_name == f"{CURR_MONTH} 2025":
+    #             target_group_id = group_id
+    #             break
+    #
+    #     if target_group_id:
+    #         transactions = session.get(f"{BASE_URL}/transactions/{target_group_id}.json")
+    #         transactions = transactions.json()
+    #         total = 0
+    #
+    #         for key, value in transactions.items():
+    #             items = value.get("items", [])
+    #
+    #             for item in items:
+    #                 total += float(item.get("amount", 0))
+    #
+    #         sheet = init_gspread()
+    #         row_cell = sheet.find("Food")
+    #         col_cell = sheet.find(month_name)
+    #         sheet.update_cell(row_cell.row, col_cell.col, total)
+    #         logger.success(f"Total: {total}")
