@@ -1,0 +1,24 @@
+name: run main.py
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Daily
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python main.py
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          NAMESPACE: ${{ env.NAMESPACE }}
+          DOMAIN: ${{ env.DOMAIN }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+          SETTLE_UP_API_KEY: ${{ secrets.SETTLE_UP_API_KEY }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
