@@ -3,8 +3,7 @@ name: run main.py
 on:
   workflow_dispatch:
   schedule:
-#    - cron: '0 0 * * *' # Daily
-     - cron: '* * * * *' # every minute
+    - cron: '0 0 * * *' # Daily
 
 
 jobs:
@@ -22,8 +21,8 @@ jobs:
       - run: uv run main.py
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          NAMESPACE: ${{ env.NAMESPACE }}
-          DOMAIN: ${{ env.DOMAIN }}
+          NAMESPACE: ${{ vars.NAMESPACE }}
+          DOMAIN: ${{ vars.DOMAIN }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
           SETTLE_UP_API_KEY: ${{ secrets.SETTLE_UP_API_KEY }}
