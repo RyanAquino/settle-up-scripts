@@ -2,7 +2,8 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Daily
+#    - cron: '0 0 * * *' # Daily
+    - cron: '* * * * *' # Minute test
 
 
 jobs:
