@@ -16,3 +16,8 @@ dependencies = [
     "setuptools>=78.1.0",
     "wheel>=0.45.1",
 ]
+
+[dependency-groups]
+dev = [
+    "black==24.8.0",
+]
