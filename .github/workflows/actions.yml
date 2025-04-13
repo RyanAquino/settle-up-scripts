@@ -20,7 +20,8 @@ jobs:
       - run: uv sync
       - run: uv run main.py
         env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY: |
+            ${{ secrets.PRIVATE_KEY }}
           NAMESPACE: ${{ vars.NAMESPACE }}
           DOMAIN: ${{ vars.DOMAIN }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
