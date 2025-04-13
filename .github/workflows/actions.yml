@@ -1,9 +1,9 @@
-name: run main.py
+name: Settle Up monthly expense daily sync
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* * * * *' # every minute
+  workflow_dispatch:
 
 
 jobs:
