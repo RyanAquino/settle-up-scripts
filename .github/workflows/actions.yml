@@ -6,8 +6,9 @@ name: Settle Up monthly expense daily sync
 #    - cron: '*/5 * * * *' # every 5
 on:
   schedule:
-    - cron: '0 0 * * *'   # daily - 12:00 AM UTC
-    - cron: '0 16 * * *'  # daily - 04:00 PM UTC
+    - cron: "*/5 * * * *"
+#    - cron: '0 0 * * *'   # daily - 12:00 AM UTC
+#    - cron: '0 16 * * *'  # daily - 04:00 PM UTC
   workflow_dispatch:
 
 
