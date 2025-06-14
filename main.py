@@ -8,7 +8,6 @@ import calendar
 import gspread
 from google.oauth2.service_account import Credentials
 from dotenv import load_dotenv
-from loguru import logger
 from requests import Session
 
 logger.info(f"Loading envs... : {load_dotenv(verbose=True)}")
