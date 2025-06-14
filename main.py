@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from loguru import logger
 from requests import Session
 
-logger.info("Loading envs... ", load_dotenv(verbose=True))
+logger.info(f"Loading envs... : {load_dotenv(verbose=True)}")
 
 NAMESPACE = os.getenv("NAMESPACE")
 DOMAIN = os.getenv("DOMAIN")
