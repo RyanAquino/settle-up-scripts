@@ -39,6 +39,6 @@ jobs:
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
       - uses: ad-m/github-push-action@v0.8.0
-      - with:
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
