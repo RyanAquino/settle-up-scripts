@@ -34,11 +34,11 @@ jobs:
           SETTLE_UP_API_KEY: ${{ secrets.SETTLE_UP_API_KEY }}
           SHEET_ID: ${{ secrets.SHEET_ID }}
       - run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add -A
-        git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
-      - uses: ad-m/github-push-action@v0.6.0
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+      - uses: ad-m/github-push-action@v0.8.0
       - with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
