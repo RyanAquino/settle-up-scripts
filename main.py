@@ -1,4 +1,3 @@
-import logging
 import logging.handlers
 import os
 from datetime import datetime, timezone
@@ -147,4 +146,4 @@ if __name__ == "__main__":
             row_cell = sheet.find("Food")
             col_cell = sheet.find(month_name)
             sheet.update_cell(row_cell.row, col_cell.col, total)
-            logger.success(f"Total: {total}")
+            logger.info(f"Total: {total}")
